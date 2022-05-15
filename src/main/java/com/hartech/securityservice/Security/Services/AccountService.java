@@ -1,7 +1,7 @@
-package com.hartech.securityservice.Services;
+package com.hartech.securityservice.Security.Services;
 
-import com.hartech.securityservice.Entities.AppRole;
-import com.hartech.securityservice.Entities.AppUser;
+import com.hartech.securityservice.Security.Entities.AppRole;
+import com.hartech.securityservice.Security.Entities.AppUser;
 
 import java.util.List;
 

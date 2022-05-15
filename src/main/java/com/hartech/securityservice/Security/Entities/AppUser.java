@@ -1,8 +1,9 @@
-package com.hartech.securityservice.Entities;
+package com.hartech.securityservice.Security.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
 @DynamicUpdate
+@ToString
 public class AppUser {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

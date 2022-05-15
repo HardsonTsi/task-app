@@ -1,11 +1,10 @@
-package com.hartech.securityservice.Services;
+package com.hartech.securityservice.Security.Services;
 
-import com.hartech.securityservice.Entities.AppRole;
-import com.hartech.securityservice.Entities.AppUser;
-import com.hartech.securityservice.Repositories.AppRoleRepository;
-import com.hartech.securityservice.Repositories.AppUserRepository;
+import com.hartech.securityservice.Security.Entities.AppRole;
+import com.hartech.securityservice.Security.Entities.AppUser;
+import com.hartech.securityservice.Security.Repositories.AppRoleRepository;
+import com.hartech.securityservice.Security.Repositories.AppUserRepository;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 @AllArgsConstructor
-public class AccountServiceImplementation implements AccountService{
+public class AccountServiceImplementation implements AccountService {
 
     private final AppUserRepository appUserRepository;
     private final AppRoleRepository appRoleRepository;
