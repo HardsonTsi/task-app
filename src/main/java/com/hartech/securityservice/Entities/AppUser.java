@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data @NoArgsConstructor @AllArgsConstructor
@@ -19,6 +21,6 @@ public class AppUser {
     private String username;
     private String password;
 
-    @ManyToMany
-    private Collection<AppRole> appUserRoles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<AppRole> appUserRoles = new ArrayList<>();
 }
