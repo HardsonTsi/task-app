@@ -7,7 +7,6 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -23,4 +22,10 @@ public class AppUser {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AppRole> appUserRoles = new ArrayList<>();
+
+    //Constructeur utilisé juste pour le test
+    public AppUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
