@@ -4,18 +4,15 @@ import com.hartech.securityservice.Security.Entities.AppRole;
 import com.hartech.securityservice.Security.Entities.AppUser;
 import com.hartech.securityservice.Security.Repositories.AppRoleRepository;
 import com.hartech.securityservice.Security.Services.AccountServiceImplementation;
-
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @SpringBootApplication
 @AllArgsConstructor
-@Transactional
 public class SecurityServiceV2Application implements CommandLineRunner {
 
     final AccountServiceImplementation accountServiceImplementation;
