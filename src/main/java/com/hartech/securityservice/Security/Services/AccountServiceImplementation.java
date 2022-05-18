@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class AccountServiceImplementation implements AccountService {
 
-
     final AppUserRepository appUserRepository;
     final AppRoleRepository appRoleRepository;
     final PasswordEncoder passwordEncoder;
@@ -35,16 +34,20 @@ public class AccountServiceImplementation implements AccountService {
 
     @Override
     public void addRoleToUser(String username, String roleName) {
-        AppUser appUser = appUserRepository.findByUsername(username);
+        AppUser appUser = appUserRepository.findAppUserByUsername(username);
         AppRole appRole = appRoleRepository.findByRoleName(roleName);
-        appUser.getAppUserRoles().add(appRole);
+
+        if (!appUser.getAppUserRoles().contains(appRole)) {
+            appUser.getAppUserRoles().add(appRole);
+        } else {
+            throw new RuntimeException("Role existant");
+        }
 
     }
 
     @Override
     public AppUser loadUserByUsername(String username) {
-
-        return appUserRepository.findByUsername(username);
+        return appUserRepository.findAppUserByUsername(username);
     }
 
     @Override
