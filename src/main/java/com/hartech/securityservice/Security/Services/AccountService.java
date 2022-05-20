@@ -2,6 +2,7 @@ package com.hartech.securityservice.Security.Services;
 
 import com.hartech.securityservice.Security.Entities.AppRole;
 import com.hartech.securityservice.Security.Entities.AppUser;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface AccountService {
 
     void addRoleToUser(String username, String roleName);
 
-    AppUser loadUserByUsername(String username);
+    UserDetails loadUserByUsername(String username);
 
     List<AppUser> listUsers();
 }
