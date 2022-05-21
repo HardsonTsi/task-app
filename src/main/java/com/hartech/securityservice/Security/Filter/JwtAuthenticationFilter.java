@@ -2,6 +2,7 @@ package com.hartech.securityservice.Security.Filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,10 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @AllArgsConstructor
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -51,6 +49,19 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", Arrays.asList(roles.toArray(new String[roles.size()])))
                 .sign(algorithm);
+
+        String jwtRefreshToken = JWT.create()
+                .withSubject(user.getUsername())
+                //5minutes
+                .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+                .withIssuer(request.getRequestURL().toString())
+                .sign(algorithm);
+
+        Map<String, String> tokens = new HashMap<>();
+        tokens.put("access-token", jwtAccessToken);
+        tokens.put("refresh-token", jwtRefreshToken);
+        response.setContentType("application/json");
+        new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
         response.setHeader("Authorization", jwtAccessToken);
         System.out.println(jwtAccessToken);

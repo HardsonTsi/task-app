@@ -19,12 +19,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
-    private final PasswordEncoder bCryptPasswordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     //Specifier les utilisateurs qui ont droit d'accès
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
 
     //Specifier les accès
@@ -32,11 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable();
+        http.headers().frameOptions().disable();
         //Ne pas utiliser les sessions
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.headers().frameOptions().disable();
-//        http.authorizeRequests().antMatchers("/login/**").permitAll();
+
         http.authorizeRequests().anyRequest().authenticated();
+
+
         http.addFilter(new JwtAuthenticationFilter(authenticationManagerBean()));
     }
 
