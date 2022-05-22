@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -89,6 +90,10 @@ public class AccountController {
         }
     }
 
+    @GetMapping("/profile")
+    public AppUser profile(Principal principal){
+        return accountService.loadUser(principal.getName());
+    }
 }
 
 @Data
