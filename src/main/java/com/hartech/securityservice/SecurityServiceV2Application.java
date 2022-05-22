@@ -45,8 +45,8 @@ public class SecurityServiceV2Application {
                         double random = Math.random() * 10;
                         String roleName = (random >= 0 && random <= 4) ? "ADMIN" : (random >= 5 && random <= 8) ? "CUSTOMER" : "USER";
                         accountService.addRoleToUser(appUser.getUsername(), roleName);
+                        System.out.println(roleName + " ==> " + appUser.getUsername());
                     });
-            System.out.println("Roles attribues");
         };
     }
 
