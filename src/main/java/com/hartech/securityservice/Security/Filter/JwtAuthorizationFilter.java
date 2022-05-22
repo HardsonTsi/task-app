@@ -25,39 +25,44 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         //Recuperation du token du Header
-        String authorizationToken = request.getHeader("Authorization");
-        if (authorizationToken != null && authorizationToken.startsWith("Bearer ")) {
-
-            try {
-                String jwt = authorizationToken.substring(7);
-
-                //Decodage
-                Algorithm algorithm = Algorithm.HMAC256("mySecret123");
-                JWTVerifier jwtVerifier = JWT.require(algorithm).build();
-                DecodedJWT decodedJWT = jwtVerifier.verify(jwt);
-
-                //Recuperation des informations
-                String username = decodedJWT.getSubject();
-                String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
-
-                Collection<GrantedAuthority> authorities = new ArrayList<>();
-                for (String role : roles) {
-                    authorities.add(new SimpleGrantedAuthority(role));
-                }
-                UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(username, null, authorities);
-
-                //Authentifier l'uilisateur
-                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-                //Passer au filtre suivant
-                filterChain.doFilter(request, response);
-            } catch (Exception e) {
-                response.setHeader("error-message", e.getMessage());
-                response.sendError(HttpServletResponse.SC_FORBIDDEN);
-            }
-
-        } else {
+        if (request.getServletPath().equals("/refreshToken")) {
             filterChain.doFilter(request, response);
+        } else {
+            String authorizationToken = request.getHeader("Authorization");
+            if (authorizationToken != null && authorizationToken.startsWith("Bearer ")) {
+
+                try {
+                    String jwt = authorizationToken.substring(7);
+
+                    //Decodage
+                    Algorithm algorithm = Algorithm.HMAC256("mySecret123");
+                    JWTVerifier jwtVerifier = JWT.require(algorithm).build();
+                    DecodedJWT decodedJWT = jwtVerifier.verify(jwt);
+
+                    //Recuperation des informations
+                    String username = decodedJWT.getSubject();
+                    String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
+
+                    Collection<GrantedAuthority> authorities = new ArrayList<>();
+                    for (String role : roles) {
+                        authorities.add(new SimpleGrantedAuthority(role));
+                    }
+                    UsernamePasswordAuthenticationToken authenticationToken =
+                            new UsernamePasswordAuthenticationToken(username, null, authorities);
+
+                    //Authentifier l'uilisateur
+                    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                    //Passer au filtre suivant
+                    filterChain.doFilter(request, response);
+                } catch (Exception e) {
+                    response.setHeader("error-message", e.getMessage());
+                    response.sendError(HttpServletResponse.SC_FORBIDDEN);
+                }
+
+            } else {
+                filterChain.doFilter(request, response);
+            }
         }
+
     }
 }
