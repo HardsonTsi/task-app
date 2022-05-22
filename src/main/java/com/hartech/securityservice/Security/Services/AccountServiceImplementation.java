@@ -53,6 +53,10 @@ public class AccountServiceImplementation implements AccountService, UserDetails
 
     }
 
+    public AppUser loadUser(String username){
+        return appUserRepository.findAppUserByUsername(username);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AppUser user = appUserRepository.findAppUserByUsername(username);

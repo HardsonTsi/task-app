@@ -3,6 +3,7 @@ package com.hartech.securityservice.Security.Filter;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hartech.securityservice.Security.JWTUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -41,11 +42,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         List<String> roles = new ArrayList<>();
         authResult.getAuthorities().forEach(a -> roles.add(a.getAuthority()));
         //Generation du Token
-        Algorithm algorithm = Algorithm.HMAC256("mySecret123");
+        Algorithm algorithm = Algorithm.HMAC256(JWTUtils.SECRET);
         String jwtAccessToken = JWT.create()
                 .withSubject(user.getUsername())
                 //5minutes
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + JWTUtils.EXPIRATION_ACCESS_TOKEN))
                 .withIssuer(request.getRequestURL().toString())
                 .withClaim("roles", Arrays.asList(roles.toArray(new String[roles.size()])))
                 .sign(algorithm);
@@ -53,7 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         String jwtRefreshToken = JWT.create()
                 .withSubject(user.getUsername())
                 //5minutes
-                .withExpiresAt(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
+                .withExpiresAt(new Date(System.currentTimeMillis() + JWTUtils.EXPIRATION_REFRESH_TOKEN))
                 .withIssuer(request.getRequestURL().toString())
                 .sign(algorithm);
 
