@@ -26,9 +26,9 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         //Recuperation du token du Header
         String authorizationToken = request.getHeader("Authorization");
-        if (authorizationToken != null && authorizationToken.startsWith("Bearer ")){
+        if (authorizationToken != null && authorizationToken.startsWith("Bearer ")) {
 
-            try{
+            try {
                 String jwt = authorizationToken.substring(7);
 
                 //Decodage
@@ -41,7 +41,7 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
                 String[] roles = decodedJWT.getClaim("roles").asArray(String.class);
 
                 Collection<GrantedAuthority> authorities = new ArrayList<>();
-                for (String role: roles) {
+                for (String role : roles) {
                     authorities.add(new SimpleGrantedAuthority(role));
                 }
                 UsernamePasswordAuthenticationToken authenticationToken =
@@ -49,13 +49,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
                 //Authentifier l'uilisateur
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-            }catch (Exception e){
+                //Passer au filtre suivant
+                filterChain.doFilter(request, response);
+            } catch (Exception e) {
                 response.setHeader("error-message", e.getMessage());
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
-                filterChain.doFilter(request, response);
             }
 
-        }else{
+        } else {
             filterChain.doFilter(request, response);
         }
     }

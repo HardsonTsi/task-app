@@ -38,8 +38,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("Successfull Authentication");
         System.out.println("======================");
         User user = (User) authResult.getPrincipal();
-        List<String> roles=new ArrayList<>();
-        authResult.getAuthorities().forEach(a-> roles.add(a.getAuthority()));
+        List<String> roles = new ArrayList<>();
+        authResult.getAuthorities().forEach(a -> roles.add(a.getAuthority()));
         //Generation du Token
         Algorithm algorithm = Algorithm.HMAC256("mySecret123");
         String jwtAccessToken = JWT.create()
@@ -63,7 +63,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         response.setContentType("application/json");
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
-        response.setHeader("Authorization", jwtAccessToken);
+//        response.setHeader("Authorization", jwtAccessToken);
         System.out.println(jwtAccessToken);
     }
 }
