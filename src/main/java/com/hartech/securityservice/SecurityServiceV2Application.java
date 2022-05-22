@@ -31,27 +31,22 @@ public class SecurityServiceV2Application {
         return args -> {
             //Ajout d'utilisateurs sans rôles
             List.of("Tessi", "Agossou", "Saizonou", "Gouthon", "Avahouin")
-                    .forEach(appUser -> {
-                        accountService.addNewUser(new AppUser(appUser, appUser));
-                        System.out.println(appUser + " save avec succes");
-                    });
+                    .forEach(appUser -> accountService.addNewUser(new AppUser(appUser, appUser)));
+            System.out.println("Users enregistres");
 
             //Ajout de rôles
             List.of("ADMIN", "USER", "CUSTOMER")
-                    .forEach(appRole -> {
-                        accountService.addNewRole(new AppRole(appRole));
-                        System.out.println(appRole + " save avec succes");
-                    });
+                    .forEach(appRole -> accountService.addNewRole(new AppRole(appRole)));
+            System.out.println("Roles enregistres");
 
             //Ajout de rôles aux utilisateurs
-
             accountService.listUsers()
                     .forEach(appUser -> {
                         double random = Math.random() * 10;
                         String roleName = (random >= 0 && random <= 4) ? "ADMIN" : (random >= 5 && random <= 8) ? "CUSTOMER" : "USER";
                         accountService.addRoleToUser(appUser.getUsername(), roleName);
-                        System.out.println(roleName + " ajoute a " + appUser.getUsername());
                     });
+            System.out.println("Roles attribues");
         };
     }
 
