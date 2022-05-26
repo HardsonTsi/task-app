@@ -29,7 +29,7 @@ public class SecurityServiceV2Application {
     @Bean
     CommandLineRunner run(AccountService accountService) {
         return args -> {
-            //Ajout d'utilisateurs sans rôles
+            // Ajout d'utilisateurs sans rôles
             List.of("Tessi", "Agossou", "Saizonou", "Gouthon", "Avahouin")
                     .forEach(appUser -> accountService.addNewUser(new AppUser(appUser, appUser)));
             System.out.println("Users enregistres");

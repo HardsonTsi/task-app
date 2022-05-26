@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -28,11 +28,25 @@ public class AccountServiceImplementation implements AccountService, UserDetails
     private PasswordEncoder passwordEncoder;
 
 
+       public AppUser addNewUser(String username, String password, String confirmedPassword) {
+        AppUser  user=appUserRepository.findAppUserByUsername(username);
+        if(user!=null) throw new RuntimeException("User already exists");
+        if(!password.equals(confirmedPassword)) throw new RuntimeException("Please confirm your password");
+        AppUser appUser=new AppUser();
+        appUser.setUsername(username);
+        appUser.setPassword(passwordEncoder.encode(password));
+        appUserRepository.save(appUser);
+        addRoleToUser(username,"USER");
+        return appUser;
+    }
+
     @Override
     public AppUser addNewUser(AppUser appUser) {
         String password = appUser.getPassword();
         appUser.setPassword(passwordEncoder.encode(password));
-        return appUserRepository.save(appUser);
+        AppUser appUser1 = appUserRepository.save(appUser);
+        addRoleToUser(appUser.getUsername(), "USER");
+        return appUser1;
     }
 
     @Override

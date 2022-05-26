@@ -39,11 +39,6 @@ public class AccountController {
         return accountService.listUsers();
     }
 
-    @PostMapping("/users")
-    public AppUser addUser(@RequestBody AppUser appUser) {
-        return accountService.addNewUser(appUser);
-    }
-
     @PostMapping("roles")
     public AppRole appRoles(@RequestBody AppRole appRole) {
         return accountService.addNewRole(appRole);
@@ -71,8 +66,8 @@ public class AccountController {
                         .withSubject(appUser.getUsername())
                         .withExpiresAt(new Date(System.currentTimeMillis() + JWTUtils.EXPIRATION_ACCESS_TOKEN))
                         .withIssuer(request.getRequestURL().toString())
-                        .withClaim("roles", appUser.getAppUserRoles().stream().map(grantedAuthorithy ->
-                                grantedAuthorithy.getRoleName()).collect(Collectors.toList()))
+                        .withClaim("roles", appUser.getAppUserRoles().stream()
+                                .map(grantedAuthorithy -> grantedAuthorithy.getRoleName()).collect(Collectors.toList()))
                         .sign(algorithm);
 
                 Map<String, String> tokens = new HashMap<>();
@@ -80,7 +75,6 @@ public class AccountController {
                 tokens.put("refresh-token", refreshToken);
                 response.setContentType("application/json");
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
-
 
             } catch (Exception e) {
                 throw e;
@@ -91,8 +85,13 @@ public class AccountController {
     }
 
     @GetMapping("/profile")
-    public AppUser profile(Principal principal){
+    public AppUser profile(Principal principal) {
         return accountService.loadUser(principal.getName());
+    }
+
+    @PostMapping("/signup")
+    public AppUser signup(@RequestBody UserForm userForm) {
+        return accountService.addNewUser(userForm.getUsername(), userForm.getPassword(), userForm.getConfirmedPassword());
     }
 }
 
@@ -100,4 +99,11 @@ public class AccountController {
 class RoleForm {
     private String username;
     private String roleName;
+}
+
+@Data
+class UserForm {
+    private String username;
+    private String password;
+    private String confirmedPassword;
 }

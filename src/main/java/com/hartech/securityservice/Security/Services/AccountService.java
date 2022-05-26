@@ -10,6 +10,8 @@ public interface AccountService {
 
     AppUser addNewUser(AppUser appUser);
 
+    AppUser addNewUser(String username, String password, String confirmedPassword);
+
     AppRole addNewRole(AppRole appRole);
 
     void addRoleToUser(String username, String roleName);
