@@ -93,6 +93,9 @@ public class AccountController {
     public AppUser signup(@RequestBody UserForm userForm) {
         return accountService.addNewUser(userForm.getUsername(), userForm.getPassword(), userForm.getConfirmedPassword());
     }
+
+
+
 }
 
 @Data
