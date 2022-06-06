@@ -9,14 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
 @SpringBootApplication
 @RequiredArgsConstructor
-@Controller
 public class SecurityServiceV2Application {
 
 
@@ -24,10 +21,7 @@ public class SecurityServiceV2Application {
         SpringApplication.run(SecurityServiceV2Application.class, args);
     }
 
-    @GetMapping("/")
-    public String welcome(){
-        return "Welcome to my security app";
-    }
+
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
