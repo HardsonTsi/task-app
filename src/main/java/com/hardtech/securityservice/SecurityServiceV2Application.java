@@ -1,8 +1,10 @@
-package com.hartech.securityservice;
+package com.hardtech.securityservice;
 
-import com.hartech.securityservice.Security.Entities.AppRole;
-import com.hartech.securityservice.Security.Entities.AppUser;
-import com.hartech.securityservice.Security.Services.AccountService;
+import com.hardtech.securityservice.Security.Entities.AppRole;
+import com.hardtech.securityservice.Security.Entities.AppUser;
+import com.hardtech.securityservice.Security.Services.AccountService;
+import com.hardtech.securityservice.tasks.entities.Task;
+import com.hardtech.securityservice.tasks.services.TaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.List;
+
 
 @SpringBootApplication
 @RequiredArgsConstructor
@@ -22,14 +25,13 @@ public class SecurityServiceV2Application {
     }
 
 
-
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    CommandLineRunner run(AccountService accountService) {
+    CommandLineRunner run(AccountService accountService, TaskService taskService) {
         return args -> {
             // Ajout d'utilisateurs sans rôles
             List.of("Tessi", "Agossou", "Saizonou", "Gouthon", "Avahouin")
@@ -49,7 +51,22 @@ public class SecurityServiceV2Application {
                         accountService.addRoleToUser(appUser.getUsername(), roleName);
                         System.out.println(roleName + " ==> " + appUser.getUsername());
                     });
+
+            //Ajouts de tâches
+            accountService.listUsers()
+                    .forEach(user -> {
+                        List.of("Shopping", "Sport", "Exercices d'école", "Cuisine")
+                                .forEach(task -> {
+                                    Task task1 = new Task();
+                                    task1.setName(task);
+                                    task1.setStatus(Math.random() > Math.random());
+                                    task1.setUsername(user.getUsername());
+                                    taskService.saveTask(task1);
+                                });
+                    });
         };
+
+
     }
 
 }

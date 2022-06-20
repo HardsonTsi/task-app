@@ -1,4 +1,4 @@
-package com.hartech.securityservice.Security.Entities;
+package com.hardtech.securityservice.Security.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -23,6 +23,9 @@ public class AppUser {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+//    @OneToMany
+//    private List<Task> tasks;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AppRole> appUserRoles = new ArrayList<>();

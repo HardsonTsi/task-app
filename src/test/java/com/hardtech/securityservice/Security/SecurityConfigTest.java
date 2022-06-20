@@ -1,4 +1,4 @@
-package com.hartech.securityservice.Security;
+package com.hardtech.securityservice.Security;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
-package com.hartech.securityservice.Security.Repositories;
+package com.hardtech.securityservice.Security.Repositories;
 
-import com.hartech.securityservice.Security.Entities.AppUser;
+import com.hardtech.securityservice.Security.Entities.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

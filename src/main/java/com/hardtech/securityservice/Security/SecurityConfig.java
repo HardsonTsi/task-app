@@ -1,7 +1,7 @@
-package com.hartech.securityservice.Security;
+package com.hardtech.securityservice.Security;
 
-import com.hartech.securityservice.Security.Filter.JwtAuthenticationFilter;
-import com.hartech.securityservice.Security.Filter.JwtAuthorizationFilter;
+import com.hardtech.securityservice.Security.Filter.JwtAuthenticationFilter;
+import com.hardtech.securityservice.Security.Filter.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +38,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         //Ne pas utiliser les sessions
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/signup/**", "/refreshToken/**").permitAll();
-        http.authorizeRequests().antMatchers("/welcome").permitAll();
+        http.authorizeRequests().antMatchers("/login/**","/signup/**", "/refreshToken/**").permitAll();
+        http.authorizeRequests().antMatchers("/tasks/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/users/**").hasAuthority("ADMIN");
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/addRoleToUser/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();

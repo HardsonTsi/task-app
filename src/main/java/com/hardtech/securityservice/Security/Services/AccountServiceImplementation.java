@@ -1,9 +1,9 @@
-package com.hartech.securityservice.Security.Services;
+package com.hardtech.securityservice.Security.Services;
 
-import com.hartech.securityservice.Security.Entities.AppRole;
-import com.hartech.securityservice.Security.Entities.AppUser;
-import com.hartech.securityservice.Security.Repositories.AppRoleRepository;
-import com.hartech.securityservice.Security.Repositories.AppUserRepository;
+import com.hardtech.securityservice.Security.Entities.AppRole;
+import com.hardtech.securityservice.Security.Entities.AppUser;
+import com.hardtech.securityservice.Security.Repositories.AppRoleRepository;
+import com.hardtech.securityservice.Security.Repositories.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,14 +1,14 @@
-package com.hartech.securityservice.Security.Controllers;
+package com.hardtech.securityservice.Security.Controllers;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hartech.securityservice.Security.Entities.AppRole;
-import com.hartech.securityservice.Security.Entities.AppUser;
-import com.hartech.securityservice.Security.JWTUtils;
-import com.hartech.securityservice.Security.Services.AccountServiceImplementation;
+import com.hardtech.securityservice.Security.Entities.AppRole;
+import com.hardtech.securityservice.Security.Entities.AppUser;
+import com.hardtech.securityservice.Security.JWTUtils;
+import com.hardtech.securityservice.Security.Services.AccountServiceImplementation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;

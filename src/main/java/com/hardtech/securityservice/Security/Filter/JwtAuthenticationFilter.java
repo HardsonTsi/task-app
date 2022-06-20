@@ -1,9 +1,9 @@
-package com.hartech.securityservice.Security.Filter;
+package com.hardtech.securityservice.Security.Filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hartech.securityservice.Security.JWTUtils;
+import com.hardtech.securityservice.Security.JWTUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -62,6 +62,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         tokens.put("access-token", jwtAccessToken);
         tokens.put("refresh-token", jwtRefreshToken);
         response.setContentType("application/json");
+        response.addHeader(JWTUtils.AUTH_HEADER, jwtAccessToken);
+        response.addHeader("Username", user.getUsername());
+        response.addHeader("Roles", String.valueOf(user.getAuthorities()));
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
         System.out.println(jwtAccessToken);

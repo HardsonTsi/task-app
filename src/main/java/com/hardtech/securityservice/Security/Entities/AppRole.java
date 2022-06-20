@@ -1,4 +1,4 @@
-package com.hartech.securityservice.Security.Entities;
+package com.hardtech.securityservice.Security.Entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,7 +1,7 @@
-package com.hartech.securityservice.Security.Services;
+package com.hardtech.securityservice.Security.Services;
 
-import com.hartech.securityservice.Security.Entities.AppRole;
-import com.hartech.securityservice.Security.Entities.AppUser;
+import com.hardtech.securityservice.Security.Entities.AppRole;
+import com.hardtech.securityservice.Security.Entities.AppUser;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
