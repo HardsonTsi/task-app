@@ -19,11 +19,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityServiceV2Application {
 
+    static int i = 0;
 
     public static void main(String[] args) {
         SpringApplication.run(SecurityServiceV2Application.class, args);
     }
-
 
     @Bean
     BCryptPasswordEncoder passwordEncoder() {
@@ -53,15 +53,20 @@ public class SecurityServiceV2Application {
                     });
 
             //Ajouts de tâches
+            String[] descriptions = {"Shopping de quelques produits", "Quelques exercices de musculatures",
+                    "Mathématiques et Structures de données", "Sauce Gombo"};
             accountService.listUsers()
                     .forEach(user -> {
+                        i = 0;
                         List.of("Shopping", "Sport", "Exercices d'école", "Cuisine")
                                 .forEach(task -> {
                                     Task task1 = new Task();
                                     task1.setName(task);
+                                    task1.setDescription(descriptions[i]);
                                     task1.setStatus(Math.random() > Math.random());
                                     task1.setUsername(user.getUsername());
                                     taskService.saveTask(task1);
+                                    i++;
                                 });
                     });
         };

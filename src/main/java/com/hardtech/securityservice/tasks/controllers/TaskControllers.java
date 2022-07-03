@@ -14,13 +14,18 @@ public class TaskControllers {
 
     private final TaskService taskService;
 
-    @GetMapping("/{username}")
-    public List<Task> getUserTasks(@PathVariable String username) {
-        return taskService.findAllUserTasks(username);
+    @GetMapping("/all")
+    public List<Task> getUserTasks() {
+        return taskService.findAllUserTasks();
     }
 
-    @GetMapping("/{username}/{id}")
-    public Task getTask(@PathVariable String username, @PathVariable Long id) {
+    @GetMapping("/alltasks")
+    public List<Task> findAllTasks() {
+        return taskService.findAllTasks();
+    }
+
+    @GetMapping("/{id}")
+    public Task getTask(@PathVariable Long id) {
         return taskService.getTaskById(id);
     }
 
@@ -39,7 +44,7 @@ public class TaskControllers {
         return taskService.updateTask(task);
     }
 
-    @PutMapping("/makeTask")
+    @PutMapping("/maketask")
     public Task makeTask(@RequestBody Task task){
         return taskService.makeTask(task);
     }

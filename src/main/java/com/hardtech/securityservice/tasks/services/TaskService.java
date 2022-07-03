@@ -3,9 +3,10 @@ package com.hardtech.securityservice.tasks.services;
 import com.hardtech.securityservice.tasks.entities.Task;
 import com.hardtech.securityservice.tasks.repositories.TaskRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -17,8 +18,13 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public List<Task> findAllUserTasks(String username) {
-        return taskRepository.findAllByUsername(username);
+    public List<Task> findAllTasks(){
+        return taskRepository.findAll();
+    }
+
+    public List<Task> findAllUserTasks() {
+        Authentication currentUser = SecurityContextHolder.getContext().getAuthentication();
+        return taskRepository.findAllByUsername(currentUser.getName());
     }
 
     public Task getTaskById(Long id) {
@@ -33,12 +39,12 @@ public class TaskService {
         return taskRepository.save(task);
     }
 
-    public Task makeTask(Task task){
+    public Task makeTask(Task task) {
         task.setStatus(!task.isStatus());
         return taskRepository.save(task);
     }
 
-    public List<Task> search(String name, String description){
+    public List<Task> search(String name, String description) {
         return taskRepository.getByNameLikeOrDescriptionLike("%" + name + "%", "%" + description + "%");
     }
 }
