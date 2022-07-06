@@ -73,6 +73,7 @@ public class AccountController {
                 Map<String, String> tokens = new HashMap<>();
                 tokens.put("access-token", jwtAccessToken);
                 tokens.put("refresh-token", refreshToken);
+                response.addHeader(JWTUtils.AUTH_HEADER, JWTUtils.PREFIX + jwtAccessToken);
                 response.setContentType("application/json");
                 new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 

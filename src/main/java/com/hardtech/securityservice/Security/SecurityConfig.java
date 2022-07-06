@@ -42,11 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login/**", "/signup/**", "/refreshToken/**").permitAll();
 
         //Taks
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/tasks/all", "tasks/{id}", "/tasks/search").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
-        http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/save").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
-        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/tasks/maketask", "tasks/update").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/tasks/alltasks").hasAuthority("ADMIN");
-        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/tasks/delete/{id}").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/tasks/all/**", "tasks/{id}/**", "/tasks/search/**").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
+        http.authorizeRequests().antMatchers(HttpMethod.POST, "/tasks/save/**").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
+        http.authorizeRequests().antMatchers(HttpMethod.PUT, "/tasks/maketask/**", "tasks/update/**").hasAnyAuthority("ADMIN", "USER", "CUSTOMER");
+        http.authorizeRequests().antMatchers(HttpMethod.GET, "/tasks/alltasks/**").hasAuthority("ADMIN");
+        http.authorizeRequests().antMatchers(HttpMethod.DELETE, "/tasks/delete/{id}/**").hasAuthority("ADMIN");
 
         http.authorizeRequests().antMatchers(HttpMethod.POST, "/addRoleToUser/**").hasAuthority("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();

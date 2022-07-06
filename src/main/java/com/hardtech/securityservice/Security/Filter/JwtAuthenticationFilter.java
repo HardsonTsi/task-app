@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -62,9 +63,14 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         tokens.put("access-token", jwtAccessToken);
         tokens.put("refresh-token", jwtRefreshToken);
         response.setContentType("application/json");
-        response.addHeader(JWTUtils.AUTH_HEADER, jwtAccessToken);
+        response.addHeader(JWTUtils.AUTH_HEADER, JWTUtils.PREFIX + jwtAccessToken);
         response.addHeader("Username", user.getUsername());
-        response.addHeader("Roles", String.valueOf(user.getAuthorities()));
+        List<String> list = new ArrayList<>();
+        for (GrantedAuthority grantedAuthority : user.getAuthorities()) {
+            list.add(grantedAuthority.getAuthority());
+        }
+        response.addHeader("Roles", user.getAuthorities().toString());
+        System.out.println("Roles => " + user.getAuthorities().toString());
         new ObjectMapper().writeValue(response.getOutputStream(), tokens);
 
         System.out.println(jwtAccessToken);
