@@ -1,0 +1,39 @@
+.nav-link:hover {
+  color: white;
+  transition: color 1s;
+}
+
+.content {
+  padding: 50px;
+  height: 100vh;
+}
+
+.menu-right {
+  display: grid;
+  /*margin-top: 10px;*/
+}
+
+.menu-right a {
+  color: black;
+  text-decoration: none;
+}
+
+.menu-right p {
+  display: inline;
+}
+
+@media only screen and (max-width: 575px) {
+  .menu-right p {
+    display: none;
+  }
+}
+
+.form-control:focus {
+  color: #212529;
+  background-color: #fff;
+  border-color: transparent;
+  outline: 0;
+  box-shadow: 0 0 0 .15rem rgb(243, 124, 132);
+  transition: box-shadow 0.8s;
+}
+

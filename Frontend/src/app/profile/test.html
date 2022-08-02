@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="profile.component.css">
+</head>
+
+<body>
+
+    <div class="container my-5">
+
+        <p class="font-weight-bold">The checkbox is a component used to allow a user to make multiple choices which is
+            broadly used in forms and surveys.</p>
+
+        <p><strong>Detailed documentation and more examples you can find in our <a
+                    href="https://mdbootstrap.com/docs/standard/forms/checkbox/" target="_blank">Checkbox Docs</a> </p>
+
+        <hr class="mt-5">
+
+        <p>Built with <a target="_blank" href="https://mdbootstrap.com/docs/standard/">Material Design for Bootstrap</a>
+            - free and powerful Bootstrap UI KIT</p>
+
+        <a class="btn btn-primary me-2" href="https://mdbootstrap.com/docs/standard/getting-started/installation/"
+            target="_blank" role="button">Download MDB UI KIT <i class="fas fa-download"></i></a>
+        <a class="btn btn-danger me-2" target="_blank" href="https://mdbootstrap.com/docs/standard/" role="button">Learn
+            more</a>
+        <a class="btn btn-success me-2" target="_blank" href="https://mdbootstrap.com/docs/standard/getting-started/"
+            role="button">Tutorials</a>
+        <a class="btn btn-dark me-2" target="_blank" href="https://github.com/mdbootstrap/mdb-ui-kit"
+            role="button">GitHub <i class="fab fa-github ms-2"></i></a>
+
+        <hr class="mb-5" />
+
+        <h1 class="h1">Checkbox</h1>
+        <h3 class="h3 dark-grey-text">Bootstrap checkbox</h3>
+
+        <hr class="my-4">
+
+        <h4 class="h4 dark-grey-text mb-4">Filled-in checkbox</h4>
+
+        <section class="border py-3">
+
+            <!-- Filled-in checkbox -->
+            <div class="form-check mb-2">
+                <input type="checkbox" class="form-check-input filled-in" id="filledInCheckbox" checked>
+                <label class="form-check-label " for="filledInCheckbox">Filled-in checkbox</label>
+            </div>
+
+            <!-- Filled-in checkbox disabled-->
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input filled-in" id="filledInCheckboxDisabled" checked
+                    disabled>
+                <label class="form-check-label disabled" for="filledInCheckboxDisabled">Filled-in checkbox
+                    disabled</label>
+            </div>
+
+        </section>
+
+        <h4 class="h4 dark-grey-text mt-5 mb-4">Checkbox color change</h4>
+
+        <section class="border py-3">
+
+            <!-- Teal example -->
+            <div class="form-check checkbox-teal mb-2">
+                <input type="checkbox" class="form-check-input" id="tealExample" checked>
+                <label class="form-check-label" for="tealExample">Teal example</label>
+            </div>
+
+            <!-- Filled-in orange example -->
+            <div class="form-check checkbox-warning-filled">
+                <input type="checkbox" class="form-check-input filled-in" id="orangeExample" checked>
+                <label class="form-check-label" for="orangeExample">Filled-in orange example</label>
+            </div>
+
+        </section>
+
+        <h4 class="h4 dark-grey-text mt-5 mb-4">Rounded checkbox</h4>
+
+        <section class="border py-3">
+
+            <!-- Filled-in rounded example -->
+            <div class="form-check checkbox-rounded checkbox-living-coral-filled mb-2">
+                <input type="checkbox" class="form-check-input filled-in" id="roundedExample2" checked>
+                <label class="form-check-label" for="roundedExample2">Filled-in rounded example</label>
+            </div>
+
+            <!-- Filled-in rounded example -->
+            <div class="form-check checkbox-rounded checkbox-cerulean-blue-filled">
+                <input type="checkbox" class="form-check-input filled-in" id="roundedExample3" checked>
+                <label class="form-check-label" for="roundedExample3">Filled-in rounded example</label>
+            </div>
+
+        </section>
+
+        <h4 class="h4 dark-grey-text mt-5 mb-4">Classic checkbox buttons</h4>
+
+        <section class="border p-3">
+
+            <!--Classic checkbox buttons-->
+            <div class="btn-group" data-toggle="buttons">
+
+                <label class="btn btn-primary active form-check-label">
+                    <input type="checkbox" class="form-check-input" checked autocomplete="off"> Checkbox 1 (pre-checked)
+                </label>
+
+                <label class="btn btn-primary form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 2
+                </label>
+
+                <label class="btn btn-primary form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 3
+                </label>
+
+            </div>
+            <!--Classic checkbox buttons-->
+
+        </section>
+
+        <h4 class="h4 dark-grey-text mt-5 mb-4">Rounded checkbox buttons</h4>
+
+        <section class="border p-3">
+
+            <!--Rounded checkbox buttons-->
+            <div class="btn-group" data-toggle="buttons">
+
+                <label class="btn btn-pink btn-rounded active btn-md form-check-label">
+                    <input type="checkbox" class="form-check-input" checked autocomplete="off"> Checkbox 1 (pre-checked)
+                </label>
+
+                <label class="btn btn-pink btn-rounded btn-md form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 2
+                </label>
+
+                <label class="btn btn-pink btn-rounded btn-md form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 3
+                </label>
+
+            </div>
+            <!--Rounded checkbox buttons-->
+
+        </section>
+
+        <h4 class="h4 dark-grey-text mt-5 mb-4">Rounded checkbox buttons with icons</h4>
+
+        <section class="border p-3">
+
+            <!--Rounded checkbox buttons with icons-->
+            <div class="btn-group" data-toggle="buttons">
+
+                <label class="btn btn-warning btn-rounded active form-check-label">
+                    <input type="checkbox" class="form-check-input" checked autocomplete="off"> Checkbox 1 (pre-checked)
+                    <i class="far fa-gem ml-2"></i>
+                </label>
+
+                <label class="btn btn-warning btn-rounded form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 2
+                    <i class="fas fa-user ml-2"></i>
+                </label>
+
+                <label class="btn btn-warning btn-rounded form-check-label">
+                    <input type="checkbox" class="form-check-input" autocomplete="off"> Checkbox 3
+                    <i class="fas fa-code ml-2"></i>
+                </label>
+
+            </div>
+            <!--Rounded checkbox buttons with icons-->
+
+        </section>
+
+    </div>
+
+
+</body>
+
+</html>
